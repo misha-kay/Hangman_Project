@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta name ="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Misha's Hangman Game :D</title>
+        
+        <!-- Google Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400&display=swap" rel="stylesheet">
+        
+        <!-- CSS Stylesheet -->
+        <link rel="stylesheet" href="style.css"/>
+    </head>
+
+    <body>
+        <div class="container">
+            <h1>Misha's Hangman Game :D</h1>
+            <canvas id="stickman"></canvas>
+            <div class="word">__ __ __ __ __ __ __ </div>
+            <p>Use the keyboard below to guess the word</p>
+            <p class="category">The category is [x]</p>
+            <p id="lives">You have [x] lives left</p>
+            <div id="keyboard">
+                <div class="keyboard-row">
+                    <button class="button">E</button>
+                    <button class="button">R</button>
+                    <button class="button">T</button>
+                    <button class="button">Y</button>
+                    <button class="button">W</button>
+                    <button class="button">U</button>
+                    <button class="button">I</button>
+                    <button class="button">O</button>
+                    <button class="button">P</button>
+                    <button class="button">Q</button>
+                </div>
+            <div class="keyboard-row">
+                    <button class="button">A</button>
+                    <button class="button">S</button>
+                    <button class="button">D</button>
+                    <button class="button">F</button>
+                    <button class="button">G</button>
+                    <button class="button">H</button>
+                    <button class="button">J</button>
+                    <button class="button">K</button>
+                    <button class="button">L</button>
+            </div>
+            <div class="keyboard-row">
+                    <button class="button">Z</button>
+                    <button class="button">X</button>
+                    <button class="button">C</button>
+                    <button class="button">V</button>
+                    <button class="button">B</button>
+                    <button class="button">N</button>
+                    <button class="button">M</button>
+            </div>
+        </div>
+        <!-- JavaScript -->
+        <script src="script.js"></script>
+    </body>
+</html>
