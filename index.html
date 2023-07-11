@@ -1,61 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta name ="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Misha's Hangman Game :D</title>
-        
-        <!-- Google Fonts -->
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400&display=swap" rel="stylesheet">
-        
-        <!-- CSS Stylesheet -->
-        <link rel="stylesheet" href="style.css"/>
-    </head>
 
-    <body>
-        <div class="container">
-            <h1>Misha's Hangman Game :D</h1>
-            <canvas id="stickman"></canvas>
-            <div class="word">__ __ __ __ __ __ __ </div>
-            <p>Use the keyboard below to guess the word</p>
-            <p class="category">The category is [x]</p>
-            <p id="lives">You have [x] lives left</p>
-            <div id="keyboard">
-                <div class="keyboard-row">
-                    <button class="button">E</button>
-                    <button class="button">R</button>
-                    <button class="button">T</button>
-                    <button class="button">Y</button>
-                    <button class="button">W</button>
-                    <button class="button">U</button>
-                    <button class="button">I</button>
-                    <button class="button">O</button>
-                    <button class="button">P</button>
-                    <button class="button">Q</button>
-                </div>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Misha's Hangman Game :D</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400&display=swap" rel="stylesheet">
+
+    <!-- CSS Stylesheet -->
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+    <div class="container">
+        <h1>Misha's Hangman Game :D</h1>
+        <div class="stickman-container">
+            <canvas id="stickman" width="200" height="250"></canvas>
+        </div>
+        <div id="word"></div>
+        <p>Use the keyboard below to guess the word</p>
+        <p class="category">The category is - Animals</p>
+        <p id="lives">You have 9 lives left</p>
+        <div id="keyboard">
             <div class="keyboard-row">
-                    <button class="button">A</button>
-                    <button class="button">S</button>
-                    <button class="button">D</button>
-                    <button class="button">F</button>
-                    <button class="button">G</button>
-                    <button class="button">H</button>
-                    <button class="button">J</button>
-                    <button class="button">K</button>
-                    <button class="button">L</button>
+                <button class="key">Q</button>
+                <button class="key">W</button>
+                <button class="key">E</button>
+                <button class="key">R</button>
+                <button class="key">T</button>
+                <button class="key">Y</button>
+                <button class="key">U</button>
+                <button class="key">I</button>
+                <button class="key">O</button>
+                <button class="key">P</button>
             </div>
             <div class="keyboard-row">
-                    <button class="button">Z</button>
-                    <button class="button">X</button>
-                    <button class="button">C</button>
-                    <button class="button">V</button>
-                    <button class="button">B</button>
-                    <button class="button">N</button>
-                    <button class="button">M</button>
+                <button class="key">A</button>
+                <button class="key">S</button>
+                <button class="key">D</button>
+                <button class="key">F</button>
+                <button class="key">G</button>
+                <button class="key">H</button>
+                <button class="key">J</button>
+                <button class="key">K</button>
+                <button class="key">L</button>
+            </div>
+            <div class="keyboard-row">
+                <button class="key">Z</button>
+                <button class="key">X</button>
+                <button class="key">C</button>
+                <button class="key">V</button>
+                <button class="key">B</button>
+                <button class="key">N</button>
+                <button class="key">M</button>
             </div>
         </div>
-        <!-- JavaScript -->
-        <script src="script.js"></script>
-    </body>
+        <button id="reset">New Game</button>
+    </div>
+</body>
+    <!-- JavaScript -->
+    <script src="script.js"></script>
 </html>
