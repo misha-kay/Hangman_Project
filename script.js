@@ -1,31 +1,64 @@
 window.addEventListener('load', (event) => {
 
-    // Variables
-    var animals = [
+    // ~~~ GLOBAL VARIABLES ~~~
+    const animals = [
         'rabbit',
         'horse',
-        'sheep',
-        'snake',
-        'goose',
         'iguana',
         'chameleon',
         'shark',
-        'crocodile'
+        'crocodile',
+        'kangaroo',
+        'donkey',
+        'badger',
+        'beaver',
+        'tiger',
+        'chinchilla',
+        'alligator',
+        'gorilla',
+        'jackal',
+        'weasel',
+        'buffalo',
+        'raccoon',
+        'chicken',
+        'llama',
+        'armadillo',
+        'hedgehog',
+        'hippopotamus'
     ];
-    var answer = '';
-    var lives = 9;
-    var livesElem = document.getElementById('lives');
-    var guessed = [];
-    var charArray = []
+    const draws = [
+        'gallows',
+        'head',
+        'body',
+        'leftArm',
+        'rightArm',
+        'leftLeg',
+        'rightLeg',
+        'leftFoot',
+        'rightFoot',
+    ]
+    const canvas = document.getElementById('stickman');
+    const context = canvas.getContext('2d');
+    let step = 0;
+    let answer = '';
+    let livesElem = document.getElementById('lives');
+    let guessed = [];
+    let charArray = [];
+    let lives = 9;
 
-    // Functions
+    // ~~~ F U N C T I O N S ~~~
     randomWord = () => {
         answer = animals[Math.floor(Math.random() * animals.length)];
-        charArray = answer.split('')
+        charArray = answer.split('');
     }
 
     updateLives = () => {
-        livesElem.innerText = 'You have ' + lives + ' lives left';
+        livesElem.innerHTML = 'You have <span style="color: #69D1C5">' + lives + '</span> lives left';
+        if (lives === 1) {
+            livesElem.innerHTML = 'You have <span style="color: #69D1C5">' + lives + '</span> life left!';
+        } else if (lives === 0){
+            livesElem.innerHTML = 'Game Over :(';
+        }
     }
 
     processGuess = (selectedElem, selectedLetter) => {
@@ -39,51 +72,52 @@ window.addEventListener('load', (event) => {
         } else {
             lives--;
             updateLives();
-            Draw(draws[step++])
+            Draw(draws[step++]);
             if (undefined === draws[step]) this.disabled = true;
         }
     }
 
     guessedWord = () => {
-        var wordStatus = '';
+        let wordStatus = '';
 
-        for (var i = 0; i < charArray.length; i++) {
-            var letter = charArray[i];
+        for (let i = 0; i < charArray.length; i++) {
+            let letter = charArray[i];
 
             if (guessed.indexOf(letter.toLowerCase()) >= 0) {
                 wordStatus += letter.toLowerCase();
             } else {
-                wordStatus += ' __ ';
+                wordStatus += ' _ ';
             }
         }
         document.getElementById('word').innerHTML = wordStatus;
     }
 
-    findCharInArr = (char) => {
-        var foundIndexes = [];
-        charArray.forEach(function (e, i) {
-            if (char.toLowerCase() === e.toLowerCase()) {
-                foundIndexes.push(i);
-            }
+    toggleKeyboardState = (state) => {
+        let keys = document.querySelectorAll('.key');
+        keys.forEach(function (e) {
+            e.disabled = state;
         });
-        return foundIndexes;
-    };
+    }
 
-    // Stickman config
-    const canvas = document.getElementById('stickman');
+    reset = () => {
+        clearCanvas();
+        toggleKeyboardState(false);
+        step = 0;
+        lives = 9;
+        guessed = [];
+        updateLives();
+        randomWord();
+        guessedWord();
+    }
 
-    const context = canvas.getContext('2d');
-
-    // Clear canvas config
     clearCanvas = () => {
-        context.clearRect(0, 0, canvas.width, canvas.height)
-    };
+        context.clearRect(0, 0, canvas.width, canvas.height);
+    }
 
-    // Draw stickman
     Draw = (part) => {
         switch (part) {
             case 'gallows':
-                context.strokeStyle = '#6c6eab';
+                context.strokeStyle = '#69D1C5';
                 context.lineWidth = 5;
                 context.beginPath();
                 context.moveTo(150, 225);
@@ -151,40 +185,36 @@ window.addEventListener('load', (event) => {
                 context.lineTo(70, 185);
                 context.stroke();
                 break;
-
         }
     };
 
-    const draws = [
-        'gallows',
-        'head',
-        'body',
-        'leftArm',
-        'rightArm',
-        'leftLeg',
-        'rightLeg',
-        'leftFoot',
-        'rightFoot',
-    ]
-    var step = 0;
-
-    // Main game logic
+    // ~~~ MAIN GAME LOGIC ~~~
     randomWord();
     guessedWord();
-    console.log({ answer })
-    console.log({ charArray })
     document.querySelector('#keyboard').addEventListener('click', function (e) {
         if (e.target.localName === 'button') {
             processGuess(e.target, e.target.innerText);
+            // End game if word has been guessed
+            let check = (currentValue) => {
+                return guessed.includes(currentValue)
+            }
+            let winner = charArray.every(check);
+            if (winner) {
+                setTimeout(() => {
+                    alert('You Win!\nClick New Game to play again.');
+                }, 200);
+                toggleKeyboardState(true);
+            }
+            // End game if all lives used
+            if (lives <= 0) {
+                setTimeout(() => {
+                    alert(`Game over!\nThe answer was: ${answer}`)
+                    reset();
+                }, 200);
+            }
         }
     });
 
-    // Restart game
-    document.getElementById('reset').addEventListener('click', function () {
-        clearCanvas()
-        step = -1
-        document.querySelector('.key').disabled = false;
-        lives = 9;
-        updateLives()
-    });
+    // Restart game if New Game clicked
+    document.getElementById('reset').addEventListener('click', reset);
 });
