@@ -6,30 +6,67 @@
 }
 
 body {
+    position: relative;
     background-color: #8789C0;
     text-align: center;
     color: #6c6eab;
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+    place-content: center;
+    place-items: center;
 }
 
 p {
     margin: 1em;
 }
 
-.container {
+#dialog-backdrop {
+    display: none;
+    width: 100vw;
+    height: 100vh;
+    place-content: center;
+    place-items: center;
+    background-color: rgba(0, 0, 0, 0.259);
+    z-index: 9999;
+    position: fixed;
+}
+
+#dialog-backdrop[popup="true"] {
     display: flex;
+}
+
+#dialog-content {
+    position: unset;
     flex-direction: column;
-    font-size: 18px;
-    background-color: #ffffff;
-    width: 90vw;
-    max-width: 34em;
-    height: 43em;
-    position: absolute;
-    transform: translate(-50%, -50%);
-    top: 50%;
-    left: 50%;
-    padding: 2em;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    border: none;
     border-radius: 1em;
-    box-shadow: 0 1.2em 2.4em rgba(49, 10, 66, 0.25);
+    padding: 1.5em;
+}
+
+#dialog-content > span {
+    color: #8789C0;
+    margin: 1em;
+}
+
+#dialog-content > button {
+    color: #8789C0;
+    border: 1px solid #8789C0;
+    background-color: transparent;
+    border-radius: 1em;
+    padding: 0.5em;
+}
+
+#dialog-content > button:hover {
+    background-color: #d0d1ff;
+    cursor: pointer;
+}
+
+#dialog-content > button:active {
+    background-color: #bbbced;
 }
 
 .stickman-container {
@@ -39,7 +76,7 @@ p {
     height: 250px;
 }
 
-#word{
+#word {
     padding: 0 0 1em 0;
 }
 
@@ -78,7 +115,30 @@ p {
     background-color: #bbbced;
 }
 
-#reset {
+#reset:hover {
+    background-color: #d0d1ff;
+    cursor: pointer;
+}
+
+#reset:active {
+    background-color: #bbbced;
+}
+
+@media only screen and (min-width: 550px) {
+    .container {
+        display: flex;
+        flex-direction: column;
+        font-size: 18px;
+        background-color: #ffffff;
+        width: 90vw;
+        max-width: 34em;
+        height: 43em;
+        padding: 2em;
+        border-radius: 1em;
+        box-shadow: 0 1.2em 2.4em rgba(49, 10, 66, 0.25);
+    }
+
+    #reset {
     background-color: transparent;
     display: flex;
     justify-content: center;
@@ -91,12 +151,75 @@ p {
     color: #6c6eab;
     align-self: center;
 }
-
-#reset:hover {
-    background-color: #d0d1ff;
-    cursor: pointer;
 }
 
-#reset:active {
-    background-color: #bbbced;
+@media only screen and (max-width: 500px) {
+
+    * {
+        background-color: white;
+    }
+    
+    #reset {
+        background-color: transparent;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: 1px solid #8789C0;
+        border-radius: 0.25em;
+        height: 50px;
+        width: 95%;
+        color: #8789C0;
+        align-self: center;
+    }
+
+    #reset:hover {
+        background-color: transparent;
+    }
+
+    .container {
+        display: flex;
+        flex-direction: column;
+        font-size: 18px;
+        background-color: white;
+        width: 100%;
+        height: 100%;
+        box-shadow: none;
+        padding: 1rem;
+    }
+
+    .stickman-container {
+        display: flexbox;
+        margin: 20px auto 20px auto;
+        width: 300px;
+        height: 250px;
+    }
+
+    #keyboard {
+        display: grid;
+        grid-template-columns: auto;
+        grid-row-gap: 0.2em;
+        margin-top: 1em;
+        margin-bottom: 1em;
+    }
+
+    .keyboard-row {
+        display: flex;
+        justify-content: center;
+    }
+
+    .key {
+        background-color: transparent;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: 1px solid #8789C0;
+        border-radius: 0.25em;
+        margin: 0 2px;
+        width: 3em;
+        height: 3em;
+    }
+
+    .key:hover {
+        background-color: transparent;
+    }
 }

@@ -1,4 +1,4 @@
-This is my first vanilla JavaScript game.
+This is my first vanilla JavaScript game. Entirely self-taught in preparation for my software development degree.
 
 Just like the old school Hangman game, you must guess the animal using the keyboard feature, making sure not
 to run out of lives!

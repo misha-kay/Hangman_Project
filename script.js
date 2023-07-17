@@ -194,23 +194,31 @@ window.addEventListener('load', (event) => {
     document.querySelector('#keyboard').addEventListener('click', function (e) {
         if (e.target.localName === 'button') {
             processGuess(e.target, e.target.innerText);
-            // End game if word has been guessed
+            // End game if correct word has been guessed
             let check = (currentValue) => {
                 return guessed.includes(currentValue)
             }
             let winner = charArray.every(check);
             if (winner) {
-                setTimeout(() => {
-                    alert('You Win!\nClick New Game to play again.');
-                }, 200);
-                toggleKeyboardState(true);
+                const winDialog = document.querySelector('#dialog-backdrop')
+                winDialog.setAttribute('popup','true')
+                document.getElementById('dialog-content').innerHTML = '<span>You Win!</span><button>Play Again</button>';
+                const winDialogResetBtn = document.querySelector('#dialog-backdrop>dialog>button')
+                winDialogResetBtn.addEventListener('click', function () {
+                    reset()
+                    winDialog.setAttribute('popup','false')
+                })
             }
             // End game if all lives used
             if (lives <= 0) {
-                setTimeout(() => {
-                    alert(`Game over!\nThe answer was: ${answer}`)
-                    reset();
-                }, 200);
+                const loseDialog = document.querySelector('#dialog-backdrop')
+                loseDialog.setAttribute('popup','true')
+                document.getElementById('dialog-content').innerHTML = '<span>You Lose!<br> The answer was: ' + answer + '</span><button>Play Again</button>';
+                const loseDialogResetBtn = document.querySelector('#dialog-backdrop>dialog>button')
+                loseDialogResetBtn.addEventListener('click', function () {
+                    reset()
+                    loseDialog.setAttribute('popup','false')
+                })
             }
         }
     });
